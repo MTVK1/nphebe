@@ -139,52 +139,66 @@
   </footer>
 
 <!-- Supabase JS Client Library -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-  // Clean project base URL (removed /rest/v1/)
-  const SUPABASE_URL = "https://avvgrwvpixdluszalalk.supabase.co";
-  const SUPABASE_ANON_KEY = "sb_publishable_4ljkbEFLoAMorrLn4kbXPw_u1WRA3CS";
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  const countElement = document.getElementById("download-count");
-  const downloadBtns = [
-    document.getElementById("download-btn-primary"),
-    document.getElementById("download-btn-card")
-  ];
-
-  // Fetch initial global count on page load
-  async function fetchDownloads() {
-    const { data, error } = await supabase
-      .from("stats")
-      .select("value")
-      .eq("key", "downloads")
-      .single();
-
-    if (!error && data) {
-      countElement.innerText = Number(data.value).toLocaleString();
-    } else {
-      console.error("Error fetching download count:", error);
-      countElement.innerText = "0"; // Fallback display
+  document.addEventListener("DOMContentLoaded", () => {
+    const SUPABASE_URL = "https://avvgrwvpixdluszalalk.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_4ljkbEFLoAMorrLn4kbXPw_u1WRA3CS";
+    
+    // Initialize client safely after library loads
+    if (!window.supabase) {
+      console.error("Supabase library failed to load.");
+      return;
     }
-  }
+    
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const countElement = document.getElementById("download-count");
+    const downloadBtns = [
+      document.getElementById("download-btn-primary"),
+      document.getElementById("download-btn-card")
+    ].filter(Boolean);
 
-  // Increment count in Supabase
-  async function incrementDownloads() {
-    const { data, error } = await supabase.rpc("increment_downloads");
-    if (!error && data !== null) {
-      countElement.innerText = Number(data).toLocaleString();
-    } else {
-      console.error("Error incrementing downloads:", error);
+    // Fetch initial download stats
+    async function fetchDownloads() {
+      try {
+        const { data, error } = await supabase
+          .from("stats")
+          .select("value")
+          .eq("key", "downloads")
+          .single();
+
+        if (error) throw error;
+        if (data) countElement.innerText = Number(data.value).toLocaleString();
+      } catch (err) {
+        console.error("Error fetching download count:", err.message);
+        countElement.innerText = "—";
+      }
     }
-  }
 
-  fetchDownloads();
+    // Increment count with optimistic UI updates
+    async function incrementDownloads(e) {
+      // Parse current number for immediate feedback
+      const currentVal = parseInt(countElement.innerText.replace(/,/g, ''), 10);
+      if (!isNaN(currentVal)) {
+        countElement.innerText = (currentVal + 1).toLocaleString();
+      }
 
-  downloadBtns.forEach(btn => {
-    if (btn) btn.addEventListener("click", incrementDownloads);
+      try {
+        const { data, error } = await supabase.rpc("increment_downloads");
+        if (error) throw error;
+        if (data !== null) countElement.innerText = Number(data).toLocaleString();
+      } catch (err) {
+        console.error("Error incrementing downloads:", err.message);
+      }
+    }
+
+    fetchDownloads();
+
+    downloadBtns.forEach(btn => {
+      btn.addEventListener("click", incrementDownloads);
+    });
   });
 </script>
-  
 </body>
 </html>
