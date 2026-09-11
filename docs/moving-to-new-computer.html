@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Move to another computer · Nphebe</title>
+  <meta name="description" content="Nphebe documentation, privacy policy, and terms of service.">
+  
+  <link href="../src/output.css" rel="stylesheet">
+  <link class="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../images/logo-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/logo-32x32.png"> 
+  <link rel="icon" type="image/png" sizes="512x512" href="../images/logo-512x512.png">  
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/logo-16x16.png"> 
+  <link rel="manifest" href="../images/logo.ico">
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bg-slate-950 text-slate-100 flex flex-col min-h-screen font-sans antialiased selection:bg-emerald-500 selection:text-slate-950">
+
+  <!-- Header / Navigation -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a class="flex items-center gap-2.5 text-xl font-bold tracking-tight text-white hover:text-emerald-400 transition-colors" href="../index.html">
+        <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shadow-inner">
+          <i class="fa-solid fa-leaf text-lg"></i>
+        </div>
+        <span>Nphebe</span>
+      </a>
+
+      <nav class="flex items-center space-x-6 text-sm font-medium text-slate-400">
+        <a class="hover:text-emerald-400 transition-colors" href="../index.html">Home</a>
+        <a class="text-emerald-400 font-semibold" href="index.html">Docs</a>
+        <a class="hover:text-emerald-400 transition-colors" href="privacy.html">Privacy</a>
+        <a class="hover:text-emerald-400 transition-colors" href="terms.html">Terms</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-10">
+      
+      <!-- Sidebar Navigation -->
+      <aside class="lg:col-span-1 space-y-8">
+        <div>
+          <h3 class="text-xs font-semibold text-emerald-400 uppercase tracking-wider mb-3 px-3 flex items-center gap-2">
+            <i class="fa-solid fa-book-open text-[10px]"></i> Documentation
+          </h3>
+          <nav class="space-y-1 text-sm font-medium">
+            <a href="index.html" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 transition-colors">
+              Overview
+            </a>
+            <a href="getting-started.html" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 transition-colors">
+              Getting started
+            </a>
+            <a href="account.html" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 transition-colors">
+              Accounts & sign-in
+            </a>
+            <a href="data.html" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 transition-colors">
+              Data & storage
+            </a>
+            <a href="backup.html" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 transition-colors">
+              Backup your data
+            </a>
+            <a href="restore.html" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 transition-colors">
+              Restore a database
+            </a>
+            <a href="moving-to-new-computer.html" class="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold">
+              <i class="fa-solid fa-leaf text-xs"></i> Move to another computer
+            </a>
+            <a href="updates.html" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 transition-colors">Updates</a>
+            <a href="troubleshooting.html" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 transition-colors">Troubleshooting</a>
+          </nav>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800/80">
+          <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3 px-3">Legal</h3>
+          <nav class="space-y-1 text-sm font-medium">
+            <a href="privacy.html" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 transition-colors">Privacy Policy</a>
+            <a href="terms.html" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 transition-colors">Terms of Service</a>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Article Section -->
+      <article class="lg:col-span-3 space-y-8">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-4">
+            <i class="fa-solid fa-leaf text-[10px]"></i> Nphebe Documentation
+          </div>
+          <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
+            Move Nphebe to another computer
+          </h1>
+          <p class="text-lg text-slate-400">
+            Use a database backup to transfer your Nphebe data to a new installation.
+          </p>
+        </div>
+
+        <!-- Computer Migration Sections -->
+        <div class="space-y-8 pt-2">
+          
+          <!-- Section 1: Old Computer -->
+          <div class="space-y-4">
+            <h2 class="text-xl font-bold text-white flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm">
+                <i class="fa-solid fa-laptop"></i>
+              </div>
+              On the old computer
+            </h2>
+            <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800">
+              <ol class="space-y-4 text-slate-300 text-sm">
+                <li class="flex items-start gap-3">
+                  <span class="w-6 h-6 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">1</span>
+                  <span class="pt-0.5 leading-relaxed">Open Nphebe.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="w-6 h-6 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">2</span>
+                  <span class="pt-0.5 leading-relaxed">Use the data-management area to export/download your DB.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="w-6 h-6 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">3</span>
+                  <span class="pt-0.5 leading-relaxed">Copy the DB file to secure external storage.</span>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Section 2: New Computer -->
+          <div class="space-y-4">
+            <h2 class="text-xl font-bold text-white flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm">
+                <i class="fa-solid fa-desktop"></i>
+              </div>
+              On the new computer
+            </h2>
+            <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800">
+              <ol class="space-y-4 text-slate-300 text-sm">
+                <li class="flex items-start gap-3">
+                  <span class="w-6 h-6 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">1</span>
+                  <span class="pt-0.5 leading-relaxed">Download and install Nphebe.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="w-6 h-6 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">2</span>
+                  <span class="pt-0.5 leading-relaxed">Open Nphebe.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="w-6 h-6 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">3</span>
+                  <span class="pt-0.5 leading-relaxed">You would see a RESTORE EXISTING DATABASE (.DB) section</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="w-6 h-6 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">4</span>
+                  <span class="pt-0.5 leading-relaxed">Click and Import the DB file from your secure storage.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="w-6 h-6 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">5</span>
+                  <span class="pt-0.5 leading-relaxed">Confirm the import and restart Nphebe if required.</span>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Info Callout Banner -->
+        <div class="p-5 rounded-2xl bg-emerald-950/20 border border-emerald-500/30 flex items-start gap-4 shadow-lg">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <i class="fa-solid fa-circle-info text-lg"></i>
+          </div>
+          <div class="text-sm text-slate-300 leading-relaxed pt-1">
+            Keep the original DB backup until you have confirmed that your notes and other expected data are available on the new computer.
+          </div>
+        </div>
+
+      </article>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 py-8 bg-slate-950 mt-12">
+    <div class="max-w-7xl mx-auto px-6 text-center text-sm text-slate-500">
+      © 2026 Nphebe · Mindful Reminders.
+    </div>
+  </footer>
+
+</body>
+</html>

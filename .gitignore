@@ -1,0 +1,22 @@
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Environment & Secrets
+.env
+.vscode/
+
+# Flask/App specific
+instance/
+flask_session/
+uploads/
+
+# Dependencies
+migrations/
+node_modules/
+venv/
+env/
+
+# Database & Temporary files
+dump.rdb
+notestorun.txt
