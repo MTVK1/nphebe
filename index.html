@@ -138,11 +138,14 @@
     </div>
   </footer>
 
-<!-- Script for Global Download Tracking -->
+<!-- Supabase JS Client Library -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-  const namespace = "nphebe-docs-app";
-  const key = "global-downloads";
-  const BASE_URL = `https://api.counterapi.dev/v1/${namespace}/${key}`;
+  // Replace with your project details from Supabase Settings -> API
+  const SUPABASE_URL = "https://avvgrwvpixdluszalalk.supabase.co/rest/v1/";
+  const SUPABASE_ANON_KEY = "sb_publishable_4ljkbEFLoAMorrLn4kbXPw_u1WRA3CS";
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   const countElement = document.getElementById("download-count");
   const downloadBtns = [
@@ -150,35 +153,33 @@
     document.getElementById("download-btn-card")
   ];
 
-  // 1. Fetch current global count on page load
-  fetch(BASE_URL)
-    .then(res => {
-      if (!res.ok) throw new Error("API network error");
-      return res.json();
-    })
-    .then(data => {
-      // Show total global downloads
-      countElement.innerText = (data.count || 0).toLocaleString();
-    })
-    .catch(() => {
-      // Fallback display if API fails
-      countElement.innerText = "1,000+";
-    });
+  // Fetch initial global count on page load
+  async function fetchDownloads() {
+    const { data, error } = await supabase
+      .from("stats")
+      .select("value")
+      .eq("key", "downloads")
+      .single();
 
-  // 2. Increment global count on download click
-  downloadBtns.forEach(btn => {
-    if (btn) {
-      btn.addEventListener("click", () => {
-        fetch(`${BASE_URL}/up`)
-          .then(res => res.json())
-          .then(data => {
-            if (data && typeof data.count === "number") {
-              countElement.innerText = data.count.toLocaleString();
-            }
-          })
-          .catch(err => console.error("Error updating download count:", err));
-      });
+    if (!error && data) {
+      countElement.innerText = Number(data.value).toLocaleString();
+    } else {
+      countElement.innerText = "12+"; // Fallback display
     }
+  }
+
+  // Increment count in Supabase
+  async function incrementDownloads() {
+    const { data, error } = await supabase.rpc("increment_downloads");
+    if (!error && data !== null) {
+      countElement.innerText = Number(data).toLocaleString();
+    }
+  }
+
+  fetchDownloads();
+
+  downloadBtns.forEach(btn => {
+    if (btn) btn.addEventListener("click", incrementDownloads);
   });
 </script>
   
