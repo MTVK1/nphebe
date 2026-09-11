@@ -142,8 +142,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-  // Replace with your project details from Supabase Settings -> API
-  const SUPABASE_URL = "https://avvgrwvpixdluszalalk.supabase.co/rest/v1/";
+  // Clean project base URL (removed /rest/v1/)
+  const SUPABASE_URL = "https://avvgrwvpixdluszalalk.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_4ljkbEFLoAMorrLn4kbXPw_u1WRA3CS";
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -164,7 +164,8 @@
     if (!error && data) {
       countElement.innerText = Number(data.value).toLocaleString();
     } else {
-      countElement.innerText = "12+"; // Fallback display
+      console.error("Error fetching download count:", error);
+      countElement.innerText = "0"; // Fallback display
     }
   }
 
@@ -173,6 +174,8 @@
     const { data, error } = await supabase.rpc("increment_downloads");
     if (!error && data !== null) {
       countElement.innerText = Number(data).toLocaleString();
+    } else {
+      console.error("Error incrementing downloads:", error);
     }
   }
 
