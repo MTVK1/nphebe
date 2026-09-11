@@ -138,10 +138,11 @@
     </div>
   </footer>
 
-<!-- Script for Tracking Downloads (Local Storage) -->
+<!-- Script for Global Download Tracking -->
 <script>
-  const STORAGE_KEY = "nphebe_download_count";
-  const INITIAL_BASE_COUNT = 12; // Base count to start from
+  const namespace = "nphebe-docs-app";
+  const key = "global-downloads";
+  const BASE_URL = `https://api.counterapi.dev/v1/${namespace}/${key}`;
 
   const countElement = document.getElementById("download-count");
   const downloadBtns = [
@@ -149,17 +150,33 @@
     document.getElementById("download-btn-card")
   ];
 
-  // Get stored count or default to initial base count
-  let currentCount = parseInt(localStorage.getItem(STORAGE_KEY), 10) || INITIAL_BASE_COUNT;
-  countElement.innerText = currentCount.toLocaleString();
+  // 1. Fetch current global count on page load
+  fetch(BASE_URL)
+    .then(res => {
+      if (!res.ok) throw new Error("API network error");
+      return res.json();
+    })
+    .then(data => {
+      // Show total global downloads
+      countElement.innerText = (data.count || 0).toLocaleString();
+    })
+    .catch(() => {
+      // Fallback display if API fails
+      countElement.innerText = "1,000+";
+    });
 
-  // Increment count on click
+  // 2. Increment global count on download click
   downloadBtns.forEach(btn => {
     if (btn) {
       btn.addEventListener("click", () => {
-        currentCount += 1;
-        localStorage.setItem(STORAGE_KEY, currentCount);
-        countElement.innerText = currentCount.toLocaleString();
+        fetch(`${BASE_URL}/up`)
+          .then(res => res.json())
+          .then(data => {
+            if (data && typeof data.count === "number") {
+              countElement.innerText = data.count.toLocaleString();
+            }
+          })
+          .catch(err => console.error("Error updating download count:", err));
       });
     }
   });
