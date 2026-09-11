@@ -65,6 +65,9 @@
         <p class="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
           Learn how to download, install, use, back up, restore, and move your Nphebe data. Nphebe is a desktop notes application with local authentication and user-controlled database files. Nphebe is solely made for Windows.....for now.
         </p>
+
+        <!-- Where the total downloads count will show -->
+        <p>Total Downloads: <span id="download-count">Loading...</span></p>
         
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a class="w-full sm:w-auto px-6 py-3.5 rounded-xl font-semibold bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20 active:scale-95" href="docs/index.html">
@@ -83,7 +86,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           
           <!-- Download Card -->
-          <a class="group block p-8 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 hover:bg-slate-900 transition-all duration-300 shadow-xl" href="downloads/NPhebe_Setup_v1.0.exe">
+          <a class="group block p-8 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 hover:bg-slate-900 transition-all duration-300 shadow-xl" href="downloads/NPhebe_Setup_v1.0.exe" id="download-btn">
             <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
               <i class="fa-solid fa-download text-xl"></i>
             </div>
@@ -122,5 +125,33 @@
     </div>
   </footer>
 
+<script>
+  // Replace 'your-unique-namespace' and 'pdf-download-key' with any custom names
+  const namespace = "nphebe-docs";
+  const key = "total-file-downloads";
+
+  const countElement = document.getElementById("download-count");
+  const downloadBtn = document.getElementById("download-btn");
+
+  // 1. Fetch current download total on page load
+  fetch(`https://api.countapi.xyz/get/${namespace}/${key}`)
+    .then(res => res.json())
+    .then(data => {
+      countElement.innerText = data.value || 0;
+    })
+    .catch(() => {
+      countElement.innerText = "0";
+    });
+
+  // 2. Increment download count when the button is clicked
+  downloadBtn.addEventListener("click", () => {
+    fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+      .then(res => res.json())
+      .then(data => {
+        countElement.innerText = data.value;
+      });
+  });
+</script>
+  
 </body>
 </html>
